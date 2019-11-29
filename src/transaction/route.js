@@ -1,8 +1,8 @@
-const { Router } = require('express');
+import { Router } from 'express';
 const router = Router();
 
 
-const { createNewTrans, getTransById, getTrans } = require("./controller")
+import { createNewTrans, getTransById, getTrans } from "./controller";
 
 //const Account = require("../models/account");
 
@@ -71,4 +71,4 @@ router.get("/:id", (req, res) => {
         })
 })
 
-module.exports = router
+export default router

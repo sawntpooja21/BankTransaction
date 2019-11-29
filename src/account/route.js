@@ -1,8 +1,8 @@
-const { Router } = require('express');
+import { Router } from 'express';
 const router = Router();
 
 
-const { createNewAccount, getAccountById, getAccount } = require("./controller")
+import { createNewAccount, getAccountById, getAccount } from "./controller";
 
 router.post('/', (req, res) => {
     createNewAccount(req.body)
@@ -42,4 +42,4 @@ router.get("/:id", (req, res) => {
         })
 })
 
-module.exports = router
+export default router

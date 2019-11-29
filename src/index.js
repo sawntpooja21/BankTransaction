@@ -1,25 +1,25 @@
-const express = require('express')
-const parser = require('body-parser') //Middleware
+import express from 'express';
+import { json, urlencoded } from 'body-parser'; //Middleware
 
 //const Customer = require("./models/customer");
 //const Account = require("./models/account");
-const mongoose = require("mongoose")
+import { connect } from "mongoose";
 const app = express()
 
-app.use(parser.json());
+app.use(json());
 app.use(
-    parser.urlencoded({
+    urlencoded({
         extended: false
     })
 );
 
-const customerRouter = require("./customer/route")
+import customerRouter from "./customer/route";
 app.use("/customer", customerRouter)
 
-const accountRouter = require("./account/route")
+import accountRouter from "./account/route";
 app.use("/account", accountRouter)
 
-const transRouter = require("./transaction/route")
+import transRouter from "./transaction/route";
 app.use("/transaction", transRouter)
 
 // app.use('/', (request, response) => {
@@ -44,7 +44,7 @@ app.use("/transaction", transRouter)
 
 
 
-mongoose.connect("mongodb+srv://root:root@cluster0-3f3sk.mongodb.net/test?retryWrites=true&w=majority",
+connect("mongodb+srv://root:root@cluster0-3f3sk.mongodb.net/test?retryWrites=true&w=majority",
     {
         useNewUrlParser: true,
         useCreateIndex: true,

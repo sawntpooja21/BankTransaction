@@ -1,5 +1,5 @@
-const Transaction = require("../models/transaction");
-const { updateBalance } = require("../account/controller");
+import Transaction, { findById, find } from "../models/transaction";
+import { updateBalance } from "../account/controller";
 
 const createNewTrans = async trans => {
     const newTrans = new Transaction(trans)
@@ -14,7 +14,7 @@ const createNewTrans = async trans => {
 };
 
 const getTransById = id => {
-    return Transaction.findById(id).populate("account", {
+    return findById(id).populate("account", {
         accountNumber: 1
     });
     // .populate("account")
@@ -24,11 +24,9 @@ const getTransById = id => {
 };
 
 const getTrans = () => {
-    return Transaction.find();
+    return find();
 }
 
-module.exports = {
-    createNewTrans: createNewTrans,
-    getTransById: getTransById,
-    getTrans: getTrans
-};
+export const createNewTrans = createNewTrans;
+export const getTransById = getTransById;
+export const getTrans = getTrans;

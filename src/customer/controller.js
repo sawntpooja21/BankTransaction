@@ -1,4 +1,4 @@
-const Customer = require("../models/customer");
+import Customer, { findById, find } from "../models/customer";
 
 const createNewCustomer = cust => {
     const newCustomer = new Customer(cust);
@@ -6,15 +6,13 @@ const createNewCustomer = cust => {
 };
 
 const getCustomerById = id => {
-    return Customer.findById(id);
+    return findById(id);
 };
 
 const getCustomers = () => {
-    return Customer.find();
+    return find();
 }
 
-module.exports = {
-    createNewCustomer: createNewCustomer,
-    getCustomerById: getCustomerById,
-    getCustomers: getCustomers
-};
+export const createNewCustomer = createNewCustomer;
+export const getCustomerById = getCustomerById;
+export const getCustomers = getCustomers;
