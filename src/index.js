@@ -48,7 +48,8 @@ mongoose.connect("mongodb+srv://root:root@cluster0-3f3sk.mongodb.net/test?retryW
     {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
     }
 )
     .then(res => {

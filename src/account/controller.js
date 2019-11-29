@@ -13,8 +13,17 @@ const getAccount = () => {
     return Account.find();
 }
 
+const updateBalance = (id, amount) => {
+    return Account.findByIdAndUpdate(id, {
+        $inc: {
+            balance: amount
+        }
+    });
+};
+
 module.exports = {
     createNewAccount: createNewAccount,
     getAccountById: getAccountById,
-    getAccount: getAccount
+    getAccount: getAccount,
+    updateBalance: updateBalance
 };
