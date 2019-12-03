@@ -1,14 +1,14 @@
 import express from 'express';
 import { json, urlencoded } from 'body-parser'; //Middleware
-
-//const Customer = require("./models/customer");
-//const Account = require("./models/account");
+;
 import { connect } from "mongoose";
 
+// import { createNewCustomer, getCustomerById, getCustomers } from "./customer/controller";
+// import { createNewAccount, getAccountById, getAccount } from "./account/controller";
+// import { createNewTrans, getTransById, getTrans } from "./transaction/controller";
 
-import customerRouter from "./customer/route";
-import transRouter from "./transaction/route";
-import accountRouter from "./account/route";
+import { ApolloServer } from "apollo-server-express";
+import schema from "./schema";
 
 const app = express()
 
@@ -20,31 +20,103 @@ app.use(
     })
 );
 
-app.use("/customer", customerRouter)
-app.use("/account", accountRouter)
-app.use("/transaction", transRouter)
+// let typeDefs = gql`
+// type Customer{
+//     id: ID!
+//     name: String!
+//     mobile: String!
+// }
 
+// type Account{
+//     id: ID!
+//     type: String!
+//     balance: Float!
+//     accountNumber: String!
+//     customer: Customer!
+// }
+// type Transaction{
+//     id: ID!
+//     type: String!
+//     amount: Float!
+//     account: Account!
+// }
 
-// app.use('/', (request, response) => {
-//     if (request.method == 'GET') {
-//         return response.send('hello bitches')
+// input CustomerInput{
+//     name: String!
+//     mobile: String!
+// }
+
+// input AccountInput{
+//     type: String!
+//     balance: Float!
+//     accountNumber: String!
+//     customer: ID!
+// }
+
+// input TransactionInput{
+//     type: String!
+//     amount: Float!
+//     account:ID!
+// }
+
+// type Query{
+//     customer(id:ID!): Customer
+//     customers: [Customer]
+//     account(id:ID!): Account
+//     accounts: [Account]
+//     transaction(id:ID!):Transaction
+//     transactions: [Transaction]
+// }
+
+// type Mutation{
+//     createCustomer(input:CustomerInput):Customer
+//     createAccount(input:AccountInput):Account
+//     createTransaction(input:TransactionInput):Transaction
+// }
+// `;
+
+// let resolvers = {
+//     Query: {
+//         customer(parent, args, context, info) {
+//             return getCustomerById(args.id);
+//         },
+
+//         customers(parent, args, context, info) {
+//             return getCustomers();
+//         },
+
+//         account(parent, args, context, info) {
+//             return getAccountById(args.id);
+//         },
+
+//         accounts(parent, args, context, info) {
+//             return getAccount();
+//         },
+
+//         transaction(parent, args, context, info) {
+//             return getTransById(args.id);
+//         },
+
+//         transactions(parent, args, context, info) {
+//             return getTrans();
+//         }
+//     },
+
+//     Mutation: {
+//         createCustomer(parent, args, context, info) {
+//             return createNewCustomer(args.input);
+//         },
+//         createAccount(parent, args, context, info) {
+//             return createNewAccount(args.input);
+//         },
+//         createTransaction(parent, args, context, info) {
+//             return createNewTrans(args.input);
+//         }
 //     }
-//     else {
-//         return response.sendStatus(405)
-//     }
-// })
+// };
 
-// app.get('/', (req, res) => {
-//     // return res.send('hello world')
-//     let name = req.query.name;
-//     return res.send(`hello ${name}`)
-// })
-
-// app.post('/', (req, res) => {
-//     let name = req.body.name;
-//     return res.send(`hello ${name}`)
-// })
-
+const server = new ApolloServer({ schema })
+server.applyMiddleware({ app });
 
 
 connect("mongodb+srv://root:root@cluster0-3f3sk.mongodb.net/test?retryWrites=true&w=majority",

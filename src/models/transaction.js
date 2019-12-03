@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+import { composeWithMongoose } from "graphql-compose-mongoose";
 
 const transactionSchema = Schema({
     type: {
@@ -24,6 +25,8 @@ const transactionSchema = Schema({
 },
     { timestamps: true })
 
-const transactionModel = model("transaction", transactionSchema);
 
+
+const transactionModel = model("transaction", transactionSchema);
 export default transactionModel;
+export const TransactionTC = composeWithMongoose(transactionModel);
