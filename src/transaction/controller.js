@@ -1,7 +1,8 @@
 import Transaction, { findById, find } from "../models/transaction";
 import { updateBalance } from "../account/controller";
 
-const createNewTrans = async trans => {
+
+export const createNewTrans = async trans => {
     const newTrans = new Transaction(trans)
     let createTransaction = await newTrans.save();
     if (trans.type == "debit") {
@@ -13,8 +14,8 @@ const createNewTrans = async trans => {
 
 };
 
-const getTransById = id => {
-    return findById(id).populate("account", {
+export const getTransById = id => {
+    return Transaction.findById(id).populate("account", {
         accountNumber: 1
     });
     // .populate("account")
@@ -23,10 +24,7 @@ const getTransById = id => {
     // });
 };
 
-const getTrans = () => {
-    return find();
+export const getTrans = () => {
+    return Transaction.find();
 }
 
-export const createNewTrans = createNewTrans;
-export const getTransById = getTransById;
-export const getTrans = getTrans;

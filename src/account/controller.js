@@ -1,27 +1,23 @@
 import Account, { findById, find, findByIdAndUpdate } from "../models/account";
 
-const createNewAccount = acc => {
+export const createNewAccount = acc => {
     const newAccount = new Account(acc);
     return newAccount.save();
 };
 
-const getAccountById = id => {
-    return findById(id);
+export const getAccountById = id => {
+    return Account.findById(id);
 };
 
-const getAccount = () => {
-    return find();
+export const getAccount = () => {
+    return Account.find();
 }
 
-const updateBalance = (id, amount) => {
-    return findByIdAndUpdate(id, {
+export const updateBalance = (id, amount) => {
+    return Account.findByIdAndUpdate(id, {
         $inc: {
             balance: amount
         }
     });
 };
 
-export const createNewAccount = createNewAccount;
-export const getAccountById = getAccountById;
-export const getAccount = getAccount;
-export const updateBalance = updateBalance;

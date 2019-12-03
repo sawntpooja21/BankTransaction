@@ -1,12 +1,10 @@
 import { Router } from 'express';
-const router = Router();
-
-
 import { createNewTrans, getTransById, getTrans } from "./controller";
 
-//const Account = require("../models/account");
+const router = Router();
 
 router.post('/', (req, res) => {
+    console.log(req.body)
     createNewTrans(req.body)
 
         .then(resp => {

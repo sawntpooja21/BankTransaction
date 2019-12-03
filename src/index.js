@@ -4,7 +4,14 @@ import { json, urlencoded } from 'body-parser'; //Middleware
 //const Customer = require("./models/customer");
 //const Account = require("./models/account");
 import { connect } from "mongoose";
+
+
+import customerRouter from "./customer/route";
+import transRouter from "./transaction/route";
+import accountRouter from "./account/route";
+
 const app = express()
+
 
 app.use(json());
 app.use(
@@ -13,14 +20,10 @@ app.use(
     })
 );
 
-import customerRouter from "./customer/route";
 app.use("/customer", customerRouter)
-
-import accountRouter from "./account/route";
 app.use("/account", accountRouter)
-
-import transRouter from "./transaction/route";
 app.use("/transaction", transRouter)
+
 
 // app.use('/', (request, response) => {
 //     if (request.method == 'GET') {
